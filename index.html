@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Series of Sketches</title>
+    <script id="fxhash-snippet">
+      //---- do not edit the following code (you can indent as you wish)
+      let alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
+      var fxhash = "oo" + Array(49).fill(0).map(_=>alphabet[(Math.random()*alphabet.length)|0]).join('')
+      let b58dec = str=>[...str].reduce((p,c)=>p*alphabet.length+alphabet.indexOf(c)|0, 0)
+      let fxhashTrunc = fxhash.slice(2)
+      let regex = new RegExp(".{" + ((fxhash.length/4)|0) + "}", 'g')
+      let hashes = fxhashTrunc.match(regex).map(h => b58dec(h))
+      let sfc32 = (a, b, c, d) => {
+        return () => {
+          a |= 0; b |= 0; c |= 0; d |= 0
+          var t = (a + b | 0) + d | 0
+          d = d + 1 | 0
+          a = b ^ b >>> 9
+          b = c + (c << 3) | 0
+          c = c << 21 | c >>> 11
+          c = c + t | 0
+          return (t >>> 0) / 4294967296
+        }
+      }
+      var fxrand = sfc32(...hashes)
+      // true if preview mode active, false otherwise
+      // you can append preview=1 to the URL to simulate preview active
+      var isFxpreview = new URLSearchParams(window.location.search).get('preview') === "1"
+      // call this method to trigger the preview
+      function fxpreview() {
+        console.log("fxhash: TRIGGER PREVIEW")
+      }
+      //---- /do not edit the following code
+    </script>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./style.css">
+  </head>
+  <body>
+    <div class="title-wrapper">
+      <h1 class="title">Series of Sketches</h1>
+    </div>
+    <div class="wrapper">
+      <div class="sketch-wrapper">
+          <a href="./pages/buoyant.html"><h3>Buoyant</h3></a>
+      </div>
+      <div class="sketch-wrapper">
+        <a href="./pages/disconectum.html"><h3>Disconectum</h3></a>
+    </div>
+    <div class="sketch-wrapper">
+      <a href="./pages/hommage_a_metropolis.html"><h3>Hommage a Metropolis</h3></a>
+  </div>
+  <div class="sketch-wrapper">
+    <a href="./pages/tempus_fugit.html"><h3>Tempus Fugit</h3></a>
+</div>
+<div class="sketch-wrapper">
+  <a href="./pages/cosmic_miniatures.html"><h3>Cosmis Miniatures</h3></a>
+</div>
+<div class="sketch-wrapper">
+  <a href="./pages/recuerdos_de_naica.html"><h3>Recuerdos de Naica</h3></a>
+</div>
+<div class="sketch-wrapper">
+  <a href="./pages/effets_de_soir.html"><h3>Effets de Soir</h3></a>
+</div>
+    </div>
+  </body>
+</html>
